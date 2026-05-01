@@ -1,4 +1,4 @@
-// ui/login/LoginViewModel.kt
+ // ui/login/LoginViewModel.kt
 package com.example.altokeyaa.ui.login
 
 import androidx.lifecycle.ViewModel
@@ -9,7 +9,7 @@ data class LoginUiState(
     val email: String = "",
     val password: String = "",
     val emailError: String? = null,
-    val passwordError: String? = null,
+    val passwordError: String? = null,      
     val isLoginSuccess: Boolean = false,
     val isLoading: Boolean = false
 )

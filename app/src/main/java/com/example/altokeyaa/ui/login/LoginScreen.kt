@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Visibility
@@ -20,11 +21,13 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.altokeyaa.ui.theme.Primary
 
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = viewModel(),
-    onLoginSuccess: () -> Unit
+    onLoginSuccess: () -> Unit,
+    onBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     var passwordVisible by remember { mutableStateOf(false) }
@@ -45,9 +48,22 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(220.dp)
-                .background(Color(0xFFE91E8C)), // Color rosa PedidosYa, cámbialo al tuyo
+                .background(Primary),
             contentAlignment = Alignment.Center
         ) {
+            // Botón volver
+            IconButton(
+                onClick = onBack,
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(top = 40.dp, start = 8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Volver",
+                    tint = Color.White
+                )
+            }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = "🛵", // Reemplaza con tu logo
@@ -128,7 +144,7 @@ fun LoginScreen(
                         .fillMaxWidth()
                         .height(50.dp),
                     shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE91E8C))
+                    colors = ButtonDefaults.buttonColors(containerColor = Primary)
                 ) {
                     Text("Ingresar", fontSize = 16.sp, fontWeight = FontWeight.Bold)
                 }
@@ -138,7 +154,7 @@ fun LoginScreen(
                     onClick = { /* TODO */ },
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 ) {
-                    Text("¿Olvidaste tu contraseña?", color = Color(0xFFE91E8C))
+                    Text("¿Olvidaste tu contraseña?", color = Primary)
                 }
             }
         }
@@ -147,7 +163,7 @@ fun LoginScreen(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text("¿No tienes cuenta?", color = Color.Gray)
             TextButton(onClick = { /* TODO: navegar a registro */ }) {
-                Text("Regístrate", color = Color(0xFFE91E8C), fontWeight = FontWeight.Bold)
+                Text("Regístrate", color = Primary, fontWeight = FontWeight.Bold)
             }
         }
     }
